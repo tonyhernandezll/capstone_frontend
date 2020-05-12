@@ -1,10 +1,11 @@
 <template>
   <div class="container">
     <h2>{{ product.name }}</h2>
-    <p>Image: {{ product.image.url}}</p>
-    <img v-bind:src="product.image.url" alt />
+    <p>Image: {{ product.image}}</p>
+    <img v-bind:src="product.image" alt />
     <p>Price: {{ product.price }}</p>
     <p>Description: {{ product.description }}</p>
+    <p>Gender: {{ product.gender }}</p>
     <router-link to="/products">Back to all Kicks</router-link>
   </div>
 </template>
@@ -26,7 +27,7 @@ export default {
   },
   created: function() {
     axios.get("/api/products/" + this.$route.params.id).then(response => {
-      this.products = response.data;
+      this.product = response.data;
       console.log(this.products);
     });
   },

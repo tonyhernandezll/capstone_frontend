@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import ProductsIndex from "../views/ProductsIndex.vue";
 import ProductsShow from "../views/ProductsShow.vue";
+import UsersIndex from "../views/UsersIndex.vue";
+import UsersShow from "../views/UsersShow.vue";
 import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
@@ -18,7 +20,9 @@ const routes = [
   { path: "/signup", name: "signup", component: Signup },
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
-  { path: "/products/:id", name: "logout", component: ProductsShow },
+  { path: "/products/:id", name: "product-show", component: ProductsShow },
+  { path: "/users", name: "users-index", component: UsersIndex },
+  { path: "/users/:id", name: "users-show", component: UsersShow },
 
   {
     path: "/products",
