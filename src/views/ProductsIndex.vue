@@ -24,7 +24,7 @@
               </a>
               <div class="portfolio-caption">
                 <div class="portfolio-caption-heading">{{ product.name}}</div>
-                <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                <!-- <div class="portfolio-caption-subheading text-muted">product</div> -->
               </div>
             </div>
           </div>
@@ -73,14 +73,14 @@
         </div>
       </div>
     </div>
-    <h1>All Kicks</h1>
+    <!-- <h1>All Kicks</h1> -->
     <div v-for="product in products">
-      <h2>{{ product.name }}</h2>
+      <!-- <h2>{{ product.name }}</h2>
       <p>Image: {{ product.image.url}}</p>
       <img v-bind:src="product.image.url" alt />
       <p>Price: {{ product.price }}</p>
-      <p>Description: {{ product.description }}</p>
-      <router-link v-bind:to="`/products/${product.id}`">More details</router-link>
+      <p>Description: {{ product.description }}</p>-->
+      <!-- <router-link v-bind:to="`/products/${product.id}`">More details</router-link> -->
     </div>
   </div>
 </template>

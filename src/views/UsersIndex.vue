@@ -3,11 +3,12 @@
     <h1>All Users</h1>
     <div v-for="user in users">
       <h2>{{ user.name }}</h2>
+      <p>Email: {{ user.email}}</p>
       <!-- <p>Shoes: {{ user.product.description }}</p> -->
       <!-- <p>Image: {{ product.image.url}}</p>
       <img v-bind:src="product.image.url" alt />
       <!-- <p>Description: {{ product.description }}</p>-->
-      <router-link v-bind:to="`/users/${user.id}`">More details</router-link>
+      <router-link v-bind:to="`/users/${user.id}`">View User's Inventory</router-link>
     </div>
   </div>
 </template>
