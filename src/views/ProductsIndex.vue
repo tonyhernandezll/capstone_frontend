@@ -62,6 +62,9 @@
                     <li>Gender: {{currentProduct.gender}}</li>
                     <li>Size: 10</li>
                   </ul>
+                  <router-link v-bind:to="`/users/${currentProduct.user_id}`">View User's Inventory</router-link>
+                  <br />
+                  <br />
                   <button class="btn btn-primary" data-dismiss="modal" type="button">
                     <i class="fas fa-times mr-1"></i>
                     Close Window

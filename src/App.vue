@@ -33,6 +33,10 @@
               <a class="nav-link js-scroll-trigger" href="/products">PRODUCTS</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/products/new">create product</a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="/users">Users</a>
             </li>
             <li class="nav-item">
