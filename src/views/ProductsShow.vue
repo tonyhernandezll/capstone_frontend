@@ -6,6 +6,7 @@
     <p>Price: {{ product.price }}</p>
     <p>Description: {{ product.description }}</p>
     <p>Gender: {{ product.gender }}</p>
+    <p>Size: {{ product.size }}</p>
     <router-link to="/products">Back to all Kicks</router-link>
   </div>
 </template>

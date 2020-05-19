@@ -10,7 +10,7 @@
           <div v-for="product in products" class="col-lg-4 col-sm-6 mb-4">
             <div class="portfolio-item">
               <a
-                v-on:click="currentProduct = product"
+                v-on:click="showProduct(product)"
                 class="portfolio-link"
                 data-toggle="modal"
                 href="#portfolioModal1"
@@ -60,8 +60,11 @@
                   <ul class="list-inline">
                     <li>Price: {{currentProduct.price}}</li>
                     <li>Gender: {{currentProduct.gender}}</li>
-                    <li>Size: 10</li>
+                    <li>Size: {{currentProduct.size}}</li>
                   </ul>
+                  <div id="map"></div>
+                  <br />
+                  <br />
                   <router-link v-bind:to="`/users/${currentProduct.user_id}`">View User's Inventory</router-link>
                   <br />
                   <br />
@@ -93,6 +96,10 @@ img.img-card {
   height: 300px;
   object-fit: cover;
 }
+
+#map {
+  height: 300px;
+}
 </style>
 
 <script>
@@ -102,15 +109,57 @@ export default {
   data: function() {
     return {
       products: [],
-      currentProduct: { image: {} },
+      currentProduct: { image: { url: "" } },
+      mapboxClient: null,
+      map: null,
+      marker: null,
     };
   },
-  created: function() {
+  mounted: function() {
     axios.get("/api/products").then(response => {
       this.products = response.data;
       console.log(this.products);
+
+      this.setupMap();
     });
   },
-  methods: {},
+
+  methods: {
+    showProduct: function(product) {
+      this.currentProduct = product;
+      if (this.marker) {
+        this.marker.remove();
+      }
+      this.mapboxClient.geocoding
+        .forwardGeocode({
+          query: product.user_address,
+          autocomplete: false,
+          limit: 1,
+        })
+        .send()
+        .then(response => {
+          if (response && response.body && response.body.features && response.body.features.length) {
+            var feature = response.body.features[0];
+            // var popup = new mapboxgl.Popup({ offset: 25 }).setText(place.description);
+            this.marker = new mapboxgl.Marker()
+              .setLngLat(feature.center)
+              // .setPopup(popup)
+              .addTo(this.map);
+            this.map.flyTo({ center: feature.center });
+          }
+        });
+    },
+    setupMap: function() {
+      console.log("setupMap");
+      mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_API_KEY;
+      this.mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+      this.map = new mapboxgl.Map({
+        container: "map", // container id
+        style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+        center: [-87.6298, 41.8781], // starting position [lng, lat]
+        zoom: 12, // starting zoom
+      });
+    },
+  },
 };
 </script>

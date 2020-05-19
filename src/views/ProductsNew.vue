@@ -12,6 +12,8 @@
       <input type="text" v-model="newShoeDescription" />
       <br />Gender:
       <input type="text" v-model="newShoeGender" />
+      <br />Size:
+      <input type="text" v-model="newShoeSize" />
       <br />
       <br />
       <input type="submit" value="Create" />
@@ -29,6 +31,7 @@ export default {
       newShoePrice: "",
       newShoeDescription: "",
       newShoeGender: "",
+      newShoeSize: "",
       errors: [],
     };
   },
@@ -40,6 +43,7 @@ export default {
         price: this.newShoePrice,
         description: this.newShoeDescription,
         gender: this.newShoeGender,
+        size: this.newShoeSize,
       };
       axios
         .post("/api/products", params)
