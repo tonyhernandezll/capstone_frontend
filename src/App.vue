@@ -10,6 +10,13 @@
       <router-link to="/logout">Logout</router-link>|
     </div>-->
     <!-- Navigation-->
+    <header class="masthead">
+      <div class="container">
+        <div class="masthead-subheading">Welcome To Sneaker City!</div>
+        <!-- <div class="masthead-heading text-uppercase">It's Nice To Meet You</div> -->
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/home">Tell me more</a>
+      </div>
+    </header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
@@ -56,13 +63,6 @@
       </div>
     </nav>
 
-    <header class="masthead">
-      <div class="container">
-        <div class="masthead-subheading">Welcome To Sneaker City!</div>
-        <!-- <div class="masthead-heading text-uppercase">It's Nice To Meet You</div> -->
-        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/home">Tell me more</a>
-      </div>
-    </header>
     <router-view />
     <footer class="footer py-4">
       <div class="container">
@@ -86,15 +86,145 @@
         </div>
       </div>
     </footer>
+
+    <div>
+      <beautiful-chat
+        :participants="participants"
+        :titleImageUrl="titleImageUrl"
+        :onMessageWasSent="onMessageWasSent"
+        :messageList="messageList"
+        :newMessagesCount="newMessagesCount"
+        :isOpen="isChatOpen"
+        :close="closeChat"
+        :icons="icons"
+        :open="openChat"
+        :showEmoji="true"
+        :showFile="true"
+        :showTypingIndicator="showTypingIndicator"
+        :showLauncher="true"
+        :showCloseButton="true"
+        :colors="colors"
+        :alwaysScrollToBottom="alwaysScrollToBottom"
+        :messageStyling="messageStyling"
+        @onType="handleOnType"
+        @edit="editMessage"
+      />
+    </div>
   </div>
 </template>
 
-<style>
-</style>
+<style></style>
 <script>
+import CloseIcon from "vue-beautiful-chat/src/assets/close-icon.png";
+import OpenIcon from "vue-beautiful-chat/src/assets/logo-no-bg.svg";
+import FileIcon from "vue-beautiful-chat/src/assets/file.svg";
+import CloseIconSvg from "vue-beautiful-chat/src/assets/close.svg";
+
 export default {
+  name: "app",
+  data() {
+    return {
+      icons: {
+        open: {
+          img: OpenIcon,
+          name: "default",
+        },
+        close: {
+          img: CloseIcon,
+          name: "default",
+        },
+        file: {
+          img: FileIcon,
+          name: "default",
+        },
+        closeSvg: {
+          img: CloseIconSvg,
+          name: "default",
+        },
+      },
+      participants: [
+        {
+          id: "user1",
+          name: "Tony",
+          imageUrl: "https://wallpaperaccess.com/full/787551.jpg",
+        },
+        {
+          id: "user2",
+          name: "Carlos",
+          imageUrl: "https://wallpaperaccess.com/full/1567008.jpg",
+        },
+      ], // the list of all the participant of the conversation. `name` is the user name, `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
+      titleImageUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/5f227626097021.5634f8e1bf8a6.gif",
+      messageList: [
+        { type: "text", author: `me`, data: { text: `Say yes!` } },
+        { type: "text", author: `user1`, data: { text: `No.` } },
+      ], // the list of the messages to show, can be paginated and adjusted dynamically
+      newMessagesCount: 0,
+      isChatOpen: false, // to determine whether the chat window should be open or closed
+      showTypingIndicator: "", // when set to a value matching the participant.id it shows the typing indicator for the specific user
+      colors: {
+        header: {
+          bg: "#4e8cff",
+          text: "#ffffff",
+        },
+        launcher: {
+          bg: "#4e8cff",
+        },
+        messageList: {
+          bg: "#ffffff",
+        },
+        sentMessage: {
+          bg: "#4e8cff",
+          text: "#ffffff",
+        },
+        receivedMessage: {
+          bg: "#eaeaea",
+          text: "#222222",
+        },
+        userInput: {
+          bg: "#f4f7f9",
+          text: "#565867",
+        },
+      }, // specifies the color scheme for the component
+      alwaysScrollToBottom: false, // when set to true always scrolls the chat to the bottom when new events are in (new message, user starts typing...)
+      messageStyling: true, // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
+    };
+  },
   mounted: function() {
     setuptheme();
+  },
+  methods: {
+    sendMessage(text) {
+      if (text.length > 0) {
+        this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1;
+        this.onMessageWasSent({ author: "support", type: "text", data: { text } });
+      }
+    },
+    onMessageWasSent(message) {
+      // called when the user sends a message
+      this.messageList = [...this.messageList, message];
+    },
+    openChat() {
+      // called when the user clicks on the fab button to open the chat
+      this.isChatOpen = true;
+      this.newMessagesCount = 0;
+    },
+    closeChat() {
+      // called when the user clicks on the botton to close the chat
+      this.isChatOpen = false;
+    },
+    handleScrollToTop() {
+      // called when the user scrolls message list to top
+      // leverage pagination for loading another page of messages
+    },
+    handleOnType() {
+      console.log("Emit typing event");
+    },
+    editMessage(message) {
+      const m = this.messageList.find(m => m.id === message.id);
+      m.isEdited = true;
+      m.data.text = message.data.text;
+    },
   },
 };
 </script>

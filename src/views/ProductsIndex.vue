@@ -9,12 +9,7 @@
         <div class="row">
           <div v-for="product in products" class="col-lg-4 col-sm-6 mb-4">
             <div class="portfolio-item">
-              <a
-                v-on:click="showProduct(product)"
-                class="portfolio-link"
-                data-toggle="modal"
-                href="#portfolioModal1"
-              >
+              <a v-on:click="showProduct(product)" class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
                 <div class="portfolio-hover">
                   <div class="portfolio-hover-content">
                     <i class="fas fa-plus fa-3x"></i>
@@ -23,7 +18,7 @@
                 <img class="img-fluid img-card" v-bind:src="product.image.url" alt />
               </a>
               <div class="portfolio-caption">
-                <div class="portfolio-caption-heading">{{ product.name}}</div>
+                <div class="portfolio-caption-heading">{{ product.name }}</div>
                 <!-- <div class="portfolio-caption-subheading text-muted">product</div> -->
               </div>
             </div>
@@ -31,13 +26,7 @@
         </div>
       </div>
     </section>
-    <div
-      class="portfolio-modal modal fade"
-      id="portfolioModal1"
-      tabindex="-1"
-      role="dialog"
-      aria-hidden="true"
-    >
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="close-modal" data-dismiss="modal">
@@ -48,19 +37,19 @@
               <div class="col-lg-8">
                 <div class="modal-body">
                   <!-- Project Details Go Here-->
-                  <h2 class="text-uppercase">{{currentProduct.name}}</h2>
+                  <h2 class="text-uppercase">{{ currentProduct.name }}</h2>
                   <p class="item-intro text-muted"></p>
                   <img class="img-fluid d-block mx-auto" v-bind:src="currentProduct.image.url" alt />
                   <p>
-                    Description: {{currentProduct.description}}
+                    Description: {{ currentProduct.description }}
                     <!-- Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
                     blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia
                     expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!-->
                   </p>
                   <ul class="list-inline">
-                    <li>Price: {{currentProduct.price}}</li>
-                    <li>Gender: {{currentProduct.gender}}</li>
-                    <li>Size: {{currentProduct.size}}</li>
+                    <li>Price: {{ currentProduct.price }}</li>
+                    <li>Gender: {{ currentProduct.gender }}</li>
+                    <li>Size: {{ currentProduct.size }}</li>
                   </ul>
                   <div id="map"></div>
                   <br />
