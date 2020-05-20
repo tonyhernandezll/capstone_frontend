@@ -12,15 +12,16 @@
     <!-- Navigation-->
     <header class="masthead">
       <div class="container">
-        <div class="masthead-subheading">Welcome To Sneaker City!</div>
+        <div class="masthead-subheading">Welcome To Snkr City!</div>
         <!-- <div class="masthead-heading text-uppercase">It's Nice To Meet You</div> -->
-        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/home">Tell me more</a>
+        <!-- <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/home">Tell me more</a> -->
       </div>
     </header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
-          <img src="/assets/img/navbar-logo.svg" />
+          <h2>$NEAKER City</h2>
+          <!-- <img src="/assets/img/navbar-logo.svg" /> -->
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
@@ -36,7 +37,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
-            <li class="nav-item">
+            <li class="nav-item"></li>
+            <li v-if="!jwt" class="nav-item">
               <a class="nav-link js-scroll-trigger" href="/products">PRODUCTS</a>
             </li>
             <li class="nav-item">
@@ -46,13 +48,13 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="/users">Users</a>
             </li>
-            <li class="nav-item">
+            <li v-if="!jwt" class="nav-item">
               <a class="nav-link js-scroll-trigger" href="/signup">Signup</a>
             </li>
-            <li class="nav-item">
+            <li v-if="!jwt" class="nav-item">
               <a class="nav-link js-scroll-trigger" href="/login">Login</a>
             </li>
-            <li class="nav-item">
+            <li v-if="jwt" class="nav-item">
               <a class="nav-link js-scroll-trigger" href="/logout">Logout</a>
             </li>
             <li class="nav-item">
@@ -124,6 +126,7 @@ export default {
   name: "app",
   data() {
     return {
+      jwt: null,
       icons: {
         open: {
           img: OpenIcon,
@@ -146,7 +149,7 @@ export default {
         {
           id: "user1",
           name: "Tony",
-          imageUrl: "https://wallpaperaccess.com/full/787551.jpg",
+          imageUrl: "https://f0.pngfuel.com/png/348/800/man-wearing-blue-shirt-illustration-png-clip-art.png",
         },
         {
           id: "user2",
@@ -154,10 +157,12 @@ export default {
           imageUrl: "https://wallpaperaccess.com/full/1567008.jpg",
         },
       ], // the list of all the participant of the conversation. `name` is the user name, `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
-      titleImageUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/5f227626097021.5634f8e1bf8a6.gif",
+      titleImageUrl: "https://wallpaperaccess.com/full/1153664.jpg",
       messageList: [
-        { type: "text", author: `me`, data: { text: `Say yes!` } },
-        { type: "text", author: `user1`, data: { text: `No.` } },
+        { type: "text", author: `me`, data: { text: `are you open for a trade?` } },
+        { type: "text", author: `user1`, data: { text: `depends on the shoe.` } },
+        { type: "text", author: `me`, data: { text: `i have a pair of Jordan 1 Royals ` } },
+        { type: "text", author: `user1`, data: { text: `let me think about it` } },
       ], // the list of the messages to show, can be paginated and adjusted dynamically
       newMessagesCount: 0,
       isChatOpen: false, // to determine whether the chat window should be open or closed
@@ -191,9 +196,13 @@ export default {
     };
   },
   mounted: function() {
+    this.setJwt();
     setuptheme();
   },
   methods: {
+    setJwt: function() {
+      this.jwt = localStorage.jwt;
+    },
     sendMessage(text) {
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1;

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h3>Name: {{ user.name }}</h3>
-    <h5>Email: {{ user.email}}</h5>
+    <h5>Email: {{ user.email }}</h5>
 
     <section class="page-section bg-light" id="portfolio">
       <div class="container">
@@ -27,7 +27,7 @@
                 <img class="img-fluid img-card" v-bind:src="product.images[0].url" alt />
               </a>
               <div class="portfolio-caption">
-                <div class="portfolio-caption-heading">{{ product.name}}</div>
+                <div class="portfolio-caption-heading">{{ product.name }}</div>
                 <!-- <div class="portfolio-caption-subheading text-muted">Illustration</div> -->
               </div>
             </div>
@@ -35,13 +35,7 @@
         </div>
       </div>
     </section>
-    <div
-      class="portfolio-modal modal fade"
-      id="portfolioModal1"
-      tabindex="-1"
-      role="dialog"
-      aria-hidden="true"
-    >
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="close-modal" data-dismiss="modal">
@@ -52,7 +46,7 @@
               <div class="col-lg-8">
                 <div class="modal-body">
                   <!-- Project Details Go Here-->
-                  <h2 class="text-uppercase">{{currentProduct.name}}</h2>
+                  <h2 class="text-uppercase">{{ currentProduct.name }}</h2>
                   <p class="item-intro text-muted"></p>
                   <img
                     class="img-fluid d-block mx-auto"
@@ -61,16 +55,19 @@
                     alt
                   />
                   <p>
-                    Description: {{currentProduct.description}}
+                    Description: {{ currentProduct.description }}
                     <!-- Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
                     blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia
                     expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!-->
                   </p>
                   <ul class="list-inline">
-                    <li>Price: {{currentProduct.price}}</li>
-                    <li>Gender: {{currentProduct.gender}}</li>
-                    <li>Size: {{currentProduct.size}}</li>
+                    <li>Price: {{ currentProduct.price }}</li>
+                    <li>Gender: {{ currentProduct.gender }}</li>
+                    <li>Size: {{ currentProduct.size }}</li>
                   </ul>
+                  <div>
+                    <button v-on:click="currentProduct;">Buy Now</button>
+                  </div>
                   <br />
                   <div id="map"></div>
                   <br />

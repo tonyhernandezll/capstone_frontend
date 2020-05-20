@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <h2>{{ CartedProduct.quantity }}</h2>
-    <p>Quantity: {{ CartedProduct.quantity}}</p>
+    <h2>hello world</h2>
+    <div v-for="CartedProduct in CartedProducts"></div>
+    <p>Quantity: {{ CartedProduct.quantity }}</p>
     <img v-bind:src="product.image" alt />
     <p>Status: {{ CartedProduct.status }}</p>
 
@@ -9,8 +10,7 @@
   </div>
 </template>
 
-<style>
-</style>
+<style></style>
 
 <script>
 import axios from "axios";
@@ -22,7 +22,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("/api/carted_products/" + this.$route.params.id).then(response => {
+    axios.post("/api/carted_products" + this.$route.params.id).then(response => {
       this.CartedProduct = response.data;
       console.log(this.CartedProduct);
     });

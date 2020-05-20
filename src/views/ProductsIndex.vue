@@ -51,10 +51,22 @@
                     <li>Gender: {{ currentProduct.gender }}</li>
                     <li>Size: {{ currentProduct.size }}</li>
                   </ul>
+
+                  <div>
+                    <button v-on:click="currentProduct;">Buy Now</button>
+                  </div>
+                  <br />
+                  <br />
                   <div id="map"></div>
                   <br />
                   <br />
                   <router-link v-bind:to="`/users/${currentProduct.user_id}`">View User's Inventory</router-link>
+                  <br />
+                  <br />
+                  <div>
+                    <button v-on:click="analyze(currentProduct)">analyze</button>
+                    <div v-for="label in labels">{{ label }}</div>
+                  </div>
                   <br />
                   <br />
                   <button class="btn btn-primary" data-dismiss="modal" type="button">
@@ -102,6 +114,7 @@ export default {
       mapboxClient: null,
       map: null,
       marker: null,
+      labels: [],
     };
   },
   mounted: function() {
@@ -116,6 +129,7 @@ export default {
   methods: {
     showProduct: function(product) {
       this.currentProduct = product;
+      this.labels = [];
       if (this.marker) {
         this.marker.remove();
       }
@@ -147,6 +161,15 @@ export default {
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
         center: [-87.6298, 41.8781], // starting position [lng, lat]
         zoom: 12, // starting zoom
+      });
+    },
+    analyze: function(product) {
+      var params = {
+        url: product.image.url,
+      };
+      axios.post("/api/analyze", params).then(response => {
+        console.log(response);
+        this.labels = response.data.responses[0].labelAnnotations;
       });
     },
   },

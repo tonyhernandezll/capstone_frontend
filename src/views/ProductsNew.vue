@@ -4,15 +4,20 @@
     <form v-on:submit.prevent="createShoe()">
       <ul>
         <li v-for="error in errors">{{ error }}</li>
-      </ul>Name:
+      </ul>
+      Name:
       <input type="text" v-model="newShoeName" />
-      <br />Price:
+      <br />
+      Price:
       <input type="text" v-model="newShoePrice" />
-      <br />Description:
+      <br />
+      Description:
       <input type="text" v-model="newShoeDescription" />
-      <br />Gender:
+      <br />
+      Gender:
       <input type="text" v-model="newShoeGender" />
-      <br />Size:
+      <br />
+      Size:
       <input type="text" v-model="newShoeSize" />
       <br />
       <br />
@@ -21,7 +26,7 @@
   </div>
 </template>
 
- <script>
+<script>
 import axios from "axios";
 
 export default {
