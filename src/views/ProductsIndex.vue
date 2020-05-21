@@ -51,10 +51,14 @@
                     <li>Gender: {{ currentProduct.gender }}</li>
                     <li>Size: {{ currentProduct.size }}</li>
                   </ul>
-
+                  <!-- button that will connect me to the shooping cart -->
                   <div>
-                    <button v-on:click="currentProduct;">Buy Now</button>
+                    <a class="btn btn-primary" href="/carted_products" role="button">Buy Now</a>
                   </div>
+
+                  <!-- <div>
+                    <button v-on:click="currentProduct;">Buy Now</button>
+                  </div> -->
                   <br />
                   <br />
                   <div id="map"></div>
