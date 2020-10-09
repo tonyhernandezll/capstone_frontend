@@ -84,9 +84,11 @@
       <button class="checkout">Checkout</button>
     </div>
 
-    <!-- <router-link to="/products">Back to all Kicks</router-link> -->
   </div>
+  
+  
 </template>
+    
 
 <style>
 /* @import "compass/css3"; */

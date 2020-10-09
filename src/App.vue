@@ -12,7 +12,7 @@
     <!-- Navigation-->
     <header class="masthead">
       <div class="container">
-        <div class="masthead-subheading">Welcome To Snkr City!</div>
+        <div class="masthead-subheading">Welcome To $neaker City</div>
         <!-- <div class="masthead-heading text-uppercase">It's Nice To Meet You</div> -->
         <!-- <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/home">Tell me more</a> -->
       </div>
@@ -70,17 +70,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
-          <div class="col-lg-4 my-3 my-lg-0">
-            <a class="btn btn-dark btn-social mx-2" href="#!">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a class="btn btn-dark btn-social mx-2" href="#!">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a class="btn btn-dark btn-social mx-2" href="#!">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-          </div>
+          <div class="col-lg-4 my-3 my-lg-0"></div>
           <div class="col-lg-4 text-lg-right">
             <a class="mr-3" href="#!">Privacy Policy</a>
             <a href="#!">Terms of Use</a>
@@ -195,12 +185,12 @@ export default {
       messageStyling: true, // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
     };
   },
-  mounted: function() {
+  mounted: function () {
     this.setJwt();
     setuptheme();
   },
   methods: {
-    setJwt: function() {
+    setJwt: function () {
       this.jwt = localStorage.jwt;
     },
     sendMessage(text) {
@@ -230,7 +220,7 @@ export default {
       console.log("Emit typing event");
     },
     editMessage(message) {
-      const m = this.messageList.find(m => m.id === message.id);
+      const m = this.messageList.find((m) => m.id === message.id);
       m.isEdited = true;
       m.data.text = message.data.text;
     },

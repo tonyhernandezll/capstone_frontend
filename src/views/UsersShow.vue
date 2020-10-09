@@ -66,7 +66,7 @@
                     <li>Size: {{ currentProduct.size }}</li>
                   </ul>
                   <div>
-                    <button v-on:click="currentProduct;">Buy Now</button>
+                    <a class="btn btn-primary" href="/carted_products" role="button">Buy Now</a>
                   </div>
                   <br />
                   <div id="map"></div>
